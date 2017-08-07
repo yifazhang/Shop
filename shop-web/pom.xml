@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>shop-manager</artifactId>
+        <groupId>com.zhangyifa</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../shop-manager/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>shop-web</artifactId>
+    <packaging>war</packaging>
+    <name>shop-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <build>
+        <finalName>shop-web</finalName>
+    </build>
+
+    <!-- 依赖管理 -->
+    <dependencies>
+        <dependency>
+            <groupId>com.zhangyifa</groupId>
+            <artifactId>shop-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- JSP相关 -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 文件上传组件 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+    </dependencies>
+</project>
