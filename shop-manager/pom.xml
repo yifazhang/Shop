@@ -25,8 +25,14 @@
     <dependencies>
         <dependency>
             <groupId>com.zhangyifa</groupId>
-            <artifactId>shop-manager-common</artifactId>
+            <artifactId>shop-common</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
