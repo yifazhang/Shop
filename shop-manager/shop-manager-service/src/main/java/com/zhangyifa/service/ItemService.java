@@ -1,5 +1,6 @@
 package com.zhangyifa.service;
 
+import com.zhangyifa.common.pojo.EUDataGridResult;
 import com.zhangyifa.pojo.TbItem;
 
 /**
@@ -7,5 +8,8 @@ import com.zhangyifa.pojo.TbItem;
  */
 public interface ItemService {
 
-    public TbItem getItemById(Long id);
+    TbItem getItemById(Long id);
+
+    EUDataGridResult getItemList(int page, int rows);
+
 }

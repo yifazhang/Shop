@@ -1,5 +1,6 @@
 package com.zhangyifa.web;
 
+import com.zhangyifa.common.pojo.EUDataGridResult;
 import com.zhangyifa.pojo.TbItem;
 import com.zhangyifa.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +11,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by zyf on 2017/8/8.
+ * 商品管理
  */
 @Controller
+@RequestMapping("/item/")
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping("/item/{itemId}")
+    @RequestMapping("/{itemId}")
     @ResponseBody
     public TbItem seachId(@PathVariable Long itemId) {
         TbItem tbItem = itemService.getItemById(itemId);
         return tbItem;
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public EUDataGridResult seachId(Integer page, Integer rows) {
+        EUDataGridResult result = itemService.getItemList(page, rows);
+        return result;
     }
 
 }
