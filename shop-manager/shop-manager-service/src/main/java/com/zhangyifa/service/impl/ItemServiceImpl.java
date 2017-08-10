@@ -3,6 +3,8 @@ package com.zhangyifa.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhangyifa.common.pojo.EUDataGridResult;
+import com.zhangyifa.common.pojo.ShopResult;
+import com.zhangyifa.common.utils.IDUtils;
 import com.zhangyifa.mapper.TbItemMapper;
 import com.zhangyifa.pojo.TbItem;
 import com.zhangyifa.pojo.TbItemExample;
@@ -10,6 +12,7 @@ import com.zhangyifa.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,5 +50,20 @@ public class ItemServiceImpl implements ItemService {
         result.setTotal(pageInfo.getTotal());
 
         return result;
+    }
+
+    @Override
+    public ShopResult createItem(TbItem item) {
+        //生成商品ID
+        Long itemId = IDUtils.genItemId();
+        item.setId(itemId);
+        //商品状态 1 正常 2 下架 3 删除
+        item.setStatus((byte)1);
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
+        //插入到数据库
+        tbItemMapper.insert(item);
+
+        return ShopResult.ok();
     }
 }

@@ -1,12 +1,14 @@
 package com.zhangyifa.web;
 
 import com.zhangyifa.common.pojo.EUDataGridResult;
+import com.zhangyifa.common.pojo.ShopResult;
 import com.zhangyifa.pojo.TbItem;
 import com.zhangyifa.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -30,8 +32,13 @@ public class ItemController {
     @RequestMapping("/list")
     @ResponseBody
     public EUDataGridResult seachId(Integer page, Integer rows) {
-        EUDataGridResult result = itemService.getItemList(page, rows);
-        return result;
+        return itemService.getItemList(page, rows);
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public ShopResult createItem(TbItem item) {
+        return itemService.createItem(item);
     }
 
 }

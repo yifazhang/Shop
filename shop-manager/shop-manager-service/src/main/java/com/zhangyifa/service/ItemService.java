@@ -1,6 +1,7 @@
 package com.zhangyifa.service;
 
 import com.zhangyifa.common.pojo.EUDataGridResult;
+import com.zhangyifa.common.pojo.ShopResult;
 import com.zhangyifa.pojo.TbItem;
 
 /**
@@ -11,5 +12,7 @@ public interface ItemService {
     TbItem getItemById(Long id);
 
     EUDataGridResult getItemList(int page, int rows);
+
+    ShopResult createItem(TbItem item);
 
 }
