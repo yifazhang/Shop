@@ -13,6 +13,6 @@ public interface ItemService {
 
     EUDataGridResult getItemList(int page, int rows);
 
-    ShopResult createItem(TbItem item);
+    ShopResult createItem(TbItem item, String desc) throws Exception;
 
 }

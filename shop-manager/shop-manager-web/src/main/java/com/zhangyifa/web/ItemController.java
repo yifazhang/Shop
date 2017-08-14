@@ -37,8 +37,8 @@ public class ItemController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public ShopResult createItem(TbItem item) {
-        return itemService.createItem(item);
+    public ShopResult createItem(TbItem item, String desc) throws Exception {
+        return itemService.createItem(item, desc);
     }
 
 }

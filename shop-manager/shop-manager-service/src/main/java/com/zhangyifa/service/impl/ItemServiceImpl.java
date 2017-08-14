@@ -5,8 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.zhangyifa.common.pojo.EUDataGridResult;
 import com.zhangyifa.common.pojo.ShopResult;
 import com.zhangyifa.common.utils.IDUtils;
+import com.zhangyifa.mapper.TbItemDescMapper;
 import com.zhangyifa.mapper.TbItemMapper;
 import com.zhangyifa.pojo.TbItem;
+import com.zhangyifa.pojo.TbItemDesc;
 import com.zhangyifa.pojo.TbItemExample;
 import com.zhangyifa.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemMapper tbItemMapper;
+
+    @Autowired
+    private TbItemDescMapper tbItemDescMapper;
 
     @Override
     public TbItem getItemById(Long id) {
@@ -53,7 +58,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ShopResult createItem(TbItem item) {
+    public ShopResult createItem(TbItem item, String desc) throws Exception {
         //生成商品ID
         Long itemId = IDUtils.genItemId();
         item.setId(itemId);
@@ -63,7 +68,29 @@ public class ItemServiceImpl implements ItemService {
         item.setUpdated(new Date());
         //插入到数据库
         tbItemMapper.insert(item);
-
+        //添加商品描述
+        ShopResult result = insertItemDesc(itemId, desc);
+        if (result.getStatus() != 200) {
+            throw new Exception();
+        }
         return ShopResult.ok();
     }
+
+    /**
+     * 添加商品描述
+     * @param itemId 商品id
+     * @param desc 商品描述
+     * @return
+     */
+    private ShopResult insertItemDesc(Long itemId, String desc) {
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        tbItemDescMapper.insert(itemDesc);
+        return ShopResult.ok();
+    }
+
+
 }
