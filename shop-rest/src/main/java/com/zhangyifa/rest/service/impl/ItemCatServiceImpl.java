@@ -55,7 +55,7 @@ public class ItemCatServiceImpl implements ItemCatService {
                 resultList.add(catNode);
                 count ++;
                 //第一层之取14条
-                if (parentId == 14 && parentId == 0) {
+                if (count == 14 && parentId == 0) {
                     break;
                 }
             } else {
