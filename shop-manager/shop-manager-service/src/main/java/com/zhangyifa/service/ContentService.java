@@ -1,5 +1,6 @@
 package com.zhangyifa.service;
 
+import com.zhangyifa.common.pojo.EUDataGridResult;
 import com.zhangyifa.common.pojo.ShopResult;
 import com.zhangyifa.pojo.TbContent;
 
@@ -9,6 +10,9 @@ import com.zhangyifa.pojo.TbContent;
 public interface ContentService {
 
     ShopResult insertContent(TbContent content);
+
+    EUDataGridResult getItemList(long categoryId, int page, int rows);
+
 
 }
 
