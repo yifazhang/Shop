@@ -11,8 +11,11 @@ public interface ContentService {
 
     ShopResult insertContent(TbContent content);
 
+    ShopResult updateContent(TbContent content);
+
     EUDataGridResult getItemList(long categoryId, int page, int rows);
 
+    ShopResult deleteContent(String ids);
 
 }
 

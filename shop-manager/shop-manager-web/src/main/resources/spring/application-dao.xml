@@ -44,4 +44,5 @@
         <property name="basePackage" value="com.zhangyifa.mapper"/>
     </bean>
 
+    <bean id="cacheSyncUtils" class="com.zhangyifa.utils.CacheSyncUtils"></bean>
 </beans>

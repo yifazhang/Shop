@@ -32,4 +32,19 @@ public class ContentController {
         return contentService.getItemList(categoryId, page, rows);
     }
 
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public ShopResult deleteContent(String ids) {
+        ShopResult result = contentService.deleteContent(ids);
+        return result;
+    }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    public ShopResult editContent(TbContent content) {
+        ShopResult result = contentService.updateContent(content);
+        return result;
+    }
+
 }

@@ -9,6 +9,7 @@ import com.zhangyifa.pojo.TbContent;
 import com.zhangyifa.pojo.TbContentExample;
 import com.zhangyifa.pojo.TbContentExample.Criteria;
 import com.zhangyifa.service.ContentService;
+import com.zhangyifa.utils.CacheSyncUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,29 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private TbContentMapper contentMapper;
 
+    @Autowired
+    private CacheSyncUtils cacheSyncUtils;
+
     @Override
     public ShopResult insertContent(TbContent content) {
         //补全pojo
         content.setCreated(new Date());
         content.setUpdated(new Date());
         contentMapper.insert(content);
+
+        //添加缓存同步逻辑
+        cacheSyncUtils.syncContent(content.getCategoryId());
+
+        return ShopResult.ok();
+    }
+
+    @Override
+    public ShopResult updateContent(TbContent content) {
+        content.setUpdated(new Date());
+        contentMapper.updateByPrimaryKeySelective(content);
+
+        //添加缓存同步逻辑
+        cacheSyncUtils.syncContent(content.getCategoryId());
 
         return ShopResult.ok();
     }
@@ -52,4 +70,32 @@ public class ContentServiceImpl implements ContentService {
 
         return result;
     }
+
+    @Override
+    public ShopResult deleteContent(String ids) {
+        String[] split = ids.split(",");
+        int delCount = 0;
+        long cateGoryId = -1;
+        int count = split.length;
+        for (int i = 0; i < count ; i++) {
+            long lid = Long.parseLong(split[i]);
+            if ( i == 0 ) {
+                TbContent tbContent = contentMapper.selectByPrimaryKey(lid);
+                cateGoryId = tbContent.getCategoryId();
+            }
+            delCount += contentMapper.deleteByPrimaryKey(lid);
+        }
+
+        //添加缓存同步逻辑
+        if (cateGoryId != -1) {
+            cacheSyncUtils.syncContent(cateGoryId);
+        }
+
+        if (delCount == count) {
+            return ShopResult.ok();
+        } else {
+            return ShopResult.build(500,"删除失败");
+        }
+    }
+
 }
