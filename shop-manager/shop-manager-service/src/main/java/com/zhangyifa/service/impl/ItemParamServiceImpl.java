@@ -38,6 +38,7 @@ public class ItemParamServiceImpl implements ItemParamService {
     public ShopResult insertItemParam(TbItemParam itemParam) {
         itemParam.setCreated(new Date());
         itemParam.setUpdated(new Date());
+        //插入到规格参数模板表
         itemParamMapper.insert(itemParam);
         return ShopResult.ok();
     }
