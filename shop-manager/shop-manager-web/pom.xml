@@ -7,9 +7,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>shop-manager-web</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>shop-manager-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>../../shop-sso</module>
+    </modules>
 
     <!-- 依赖管理 -->
     <dependencies>

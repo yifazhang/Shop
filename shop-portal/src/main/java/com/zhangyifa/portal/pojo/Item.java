@@ -1,5 +1,7 @@
 package com.zhangyifa.portal.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by zyf on 2017/9/25.
  */
@@ -69,6 +71,7 @@ public class Item {
         this.itemDesc = itemDesc;
     }
 
+    @JsonIgnore
     public String[] getImages() {
         if (image != null) {
             String[] split = image.split(",");
